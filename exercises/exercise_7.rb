@@ -26,3 +26,12 @@ puts "Exercise 7"
 puts "----------"
 
 # Your code goes here ...
+class Store < ActiveRecord::Base
+  validates :name, length: { minimum: 3,
+  too_short: "Store name must have minimum 3 letters" }
+  validates :annual_revenue, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+end
+
+@store6 = Store.create(name: "Fe", annual_revenue: -1, mens_apparel: true, womens_apparel: true)
+@store6.valid?
+puts @store6.errors.full_messages
